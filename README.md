@@ -1,2 +1,1 @@
-# Wi-Fi-Evil-Twin-Detection-System
-A Flask-based cybersecurity web application that detects potential Wi-Fi Evil Twin attacks by analyzing SSIDs, BSSIDs, and signal strength to identify rogue access points and alert users in real time.
+The Wi-Fi Evil Twin Detection System is a cybersecurity project designed to detect rogue wireless access points that impersonate legitimate Wi-Fi networks. Built using Python, Flask, and PyWiFi, the system scans nearby networks, analyzes SSIDs and BSSIDs, identifies suspicious access points, and provides alerts through an interactive web dashboard. The project aims to enhance wireless security by helping users avoid connecting to malicious Wi-Fi hotspots.
