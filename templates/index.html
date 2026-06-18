@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wi-Fi Evil Twin Detection System</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#0f172a;
+            color:white;
+        }
+
+        nav{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px 10%;
+            background:#1e293b;
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:bold;
+            color:#38bdf8;
+        }
+
+        nav ul{
+            display:flex;
+            list-style:none;
+            gap:25px;
+        }
+
+        nav ul li a{
+            text-decoration:none;
+            color:white;
+            transition:0.3s;
+        }
+
+        nav ul li a:hover{
+            color:#38bdf8;
+        }
+
+        .hero{
+            height:90vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            flex-direction:column;
+            padding:20px;
+        }
+
+        .hero h1{
+            font-size:55px;
+            margin-bottom:20px;
+            color:#38bdf8;
+        }
+
+        .hero p{
+            font-size:20px;
+            max-width:800px;
+            line-height:1.6;
+            margin-bottom:30px;
+        }
+
+        .btn{
+            background:#38bdf8;
+            color:black;
+            padding:15px 30px;
+            border:none;
+            border-radius:10px;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:white;
+        }
+
+        .features{
+            padding:80px 10%;
+            text-align:center;
+        }
+
+        .features h2{
+            margin-bottom:40px;
+            color:#38bdf8;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:#1e293b;
+            padding:25px;
+            border-radius:15px;
+        }
+
+        .card h3{
+            margin-bottom:15px;
+            color:#38bdf8;
+        }
+
+        footer{
+            text-align:center;
+            padding:20px;
+            background:#1e293b;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">WiFi Shield</div>
+
+        <ul>
+    		<li><a href="/">Home</a></li>
+    		<li><a href="/scanner">Scanner</a></li>
+    		<li><a href="/dashboard">Dashboard</a></li>
+    		<li><a href="/logs">Logs</a></li>
+    		<li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Wi-Fi Evil Twin Detection System</h1>
+
+        <p>
+            Protect users from rogue Wi-Fi access points that imitate
+            legitimate networks. Detect suspicious SSIDs, analyze BSSIDs,
+            monitor signal anomalies, and receive real-time security alerts.
+        </p>
+
+       <a href="/scanner">
+    <button class="btn">
+        Start Detection
+    </button>
+</a>
+    </section>
+
+    <section class="features">
+
+        <h2>Key Features</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Wi-Fi Scanning</h3>
+                <p>Scan nearby Wi-Fi networks in real time.</p>
+            </div>
+
+            <div class="card">
+                <h3>Evil Twin Detection</h3>
+                <p>Identify fake access points using SSID and BSSID analysis.</p>
+            </div>
+
+            <div class="card">
+                <h3>Threat Alerts</h3>
+                <p>Instant warning notifications for suspicious networks.</p>
+            </div>
+
+            <div class="card">
+                <h3>Security Reports</h3>
+                <p>Generate detailed logs and scan reports.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 Wi-Fi Evil Twin Detection System | Cybersecurity Project</p>
+    </footer>
+
+</body>
+</html>

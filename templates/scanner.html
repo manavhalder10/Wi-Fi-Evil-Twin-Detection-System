@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wi-Fi Scanner</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#0f172a;
+            color:white;
+        }
+
+        nav{
+            background:#1e293b;
+            padding:20px;
+            text-align:center;
+        }
+
+        nav h1{
+            color:#38bdf8;
+        }
+
+        .container{
+            width:90%;
+            margin:40px auto;
+        }
+
+        .scan-btn{
+            background:#38bdf8;
+            color:black;
+            padding:12px 25px;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;
+            margin-bottom:25px;
+        }
+
+        .scan-btn:hover{
+            background:white;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:#1e293b;
+            border-radius:10px;
+            overflow:hidden;
+        }
+
+        th{
+            background:#38bdf8;
+            color:black;
+            padding:15px;
+        }
+
+        td{
+            padding:15px;
+            text-align:center;
+            border-bottom:1px solid #334155;
+        }
+
+        tr:hover{
+            background:#334155;
+        }
+
+        .signal-good{
+            color:#22c55e;
+            font-weight:bold;
+        }
+
+        .signal-medium{
+            color:#facc15;
+            font-weight:bold;
+        }
+
+        .signal-weak{
+            color:#ef4444;
+            font-weight:bold;
+        }
+
+        .status-safe{
+            color:#22c55e;
+            font-weight:bold;
+        }
+
+        .status-suspicious{
+            color:#ef4444;
+            font-weight:bold;
+        }
+
+        .summary{
+            display:flex;
+            gap:20px;
+            margin-bottom:30px;
+        }
+
+        .card{
+            flex:1;
+            background:#1e293b;
+            padding:20px;
+            border-radius:10px;
+            text-align:center;
+        }
+
+        .card h2{
+            color:#38bdf8;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>Wi-Fi Evil Twin Detection System</h1>
+</nav>
+
+<div class="container">
+
+    <div class="summary">
+
+        <div class="card">
+            <h2>{{ networks|length }}</h2>
+            <p>Networks Found</p>
+        </div>
+
+        <div class="card">
+            <h2>Live Scan</h2>
+            <p>Real-Time Monitoring</p>
+        </div>
+
+    </div>
+
+    <button class="scan-btn" onclick="location.reload()">
+        🔄 Scan Again
+    </button>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>SSID</th>
+                <th>BSSID</th>
+                <th>Signal (dBm)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for network in networks %}
+
+        <tr>
+
+            <td>{{ network.ssid }}</td>
+
+            <td>{{ network.bssid }}</td>
+
+            <td>
+                {% if network.signal > -50 %}
+                    <span class="signal-good">{{ network.signal }}</span>
+                {% elif network.signal > -70 %}
+                    <span class="signal-medium">{{ network.signal }}</span>
+                {% else %}
+                    <span class="signal-weak">{{ network.signal }}</span>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if network.ssid == "College_WiFi" and network.bssid != "AA:BB:CC:DD:EE:FF" %}
+                    <span class="status-suspicious">
+                        ⚠ Suspicious
+                    </span>
+                {% else %}
+                    <span class="status-safe">
+                        ✓ Safe
+                    </span>
+                {% endif %}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
