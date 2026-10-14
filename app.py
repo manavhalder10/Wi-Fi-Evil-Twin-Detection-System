@@ -8,25 +8,17 @@ import time
 app = Flask(__name__)
 
 
-# ==========================================
-# TRUSTED NETWORK CONFIGURATION
-# Add actual, verified SSIDs and BSSIDs.
-# Multiple BSSIDs are supported per SSID.
-# ==========================================
-
 trusted_networks = {
     "OnePlus 12R": ["b2:92:97:f2:a9:e7"],
-    # "College_WiFi": ["actual:bssid:here"],
-    # "Home_WiFi": ["actual:bssid:here"]
+    "College_WiFi": ["actual:bssid:here"],
+    "Home_WiFi": ["actual:bssid:here"]
 }
 
 
-# Normalize BSSID for consistent comparison
 def normalize_bssid(bssid):
     return (bssid or "").strip().lower().rstrip(":")
 
 
-# Scan nearby Wi-Fi networks
 def scan_networks():
     wifi = pywifi.PyWiFi()
     interfaces = wifi.interfaces()
@@ -49,7 +41,6 @@ def scan_networks():
         if not bssid:
             continue
 
-        # Remove duplicate SSID/BSSID entries
         key = (raw_ssid, bssid)
 
         if key in seen:
@@ -67,15 +58,10 @@ def scan_networks():
     return networks
 
 
-# ==========================================
-# EVIL TWIN DETECTION
-# ==========================================
-
 def detect_evil_twin():
     scanned_networks = scan_networks()
     results = []
 
-    # Normalize trusted BSSID configuration
     trusted = {
         ssid.strip(): {
             normalize_bssid(bssid)
@@ -88,7 +74,6 @@ def detect_evil_twin():
         for ssid, addresses in trusted_networks.items()
     }
 
-    # Group visible SSIDs by distinct BSSID
     ssid_bssids = defaultdict(set)
 
     for network in scanned_networks:
@@ -97,7 +82,6 @@ def detect_evil_twin():
         if ssid:
             ssid_bssids[ssid].add(network["bssid"])
 
-    # Classify scanned networks
     for network in scanned_networks:
         ssid = network["raw_ssid"]
         bssid = network["bssid"]
@@ -137,18 +121,11 @@ def detect_evil_twin():
     return results
 
 
-# ==========================================
-# HOME PAGE
-# ==========================================
-
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# ==========================================
-# SCANNER PAGE
-# ==========================================
 
 @app.route("/scanner")
 def scanner():
@@ -160,9 +137,6 @@ def scanner():
     )
 
 
-# ==========================================
-# DASHBOARD PAGE
-# ==========================================
 
 @app.route("/dashboard")
 def dashboard():
@@ -181,10 +155,6 @@ def dashboard():
     )
 
 
-# ==========================================
-# LOGS PAGE
-# ==========================================
-
 @app.route("/logs")
 def logs():
     scan_logs = detect_evil_twin()
@@ -195,18 +165,11 @@ def logs():
     )
 
 
-# ==========================================
-# ABOUT PAGE
-# ==========================================
 
 @app.route("/about")
 def about():
     return render_template("about.html")
 
-
-# ==========================================
-# RUN FLASK SERVER
-# ==========================================
 
 if __name__ == "__main__":
     app.run(
